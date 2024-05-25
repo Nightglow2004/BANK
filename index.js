@@ -1,80 +1,28 @@
-function signup() {
-    let name1 = document.getElementById('name').value;
-    let name2 = document.getElementById('namel').value;
-    let email = document.getElementById('mail').value;
-    let passw = document.getElementById('password').value; 
-
-    if (name1 === "") {
-        alert("Enter first name");
-    } else if (name2 === "") {
-        alert("Enter last name");
-    } else if (email === "") {
-        alert("Enter email");
-    } else if (passw === "") {
-        alert("Enter password");
-    } else {
-        localStorage.setItem("username first", name1);
-        localStorage.setItem("username last", name2);
-        localStorage.setItem("usermail", email);
-        localStorage.setItem("userpassword", passw);
-        alert("You have successfully registered!");
-        window.location.href = "login.html";    }
-}
-
-const eye = document.getElementById('show');
-eye.addEventListener('click', function() {
-    const passwo = document.getElementById('password');
-    if (passwo.type === 'password') {
-        passwo.type = 'text';
-    } else {
-        passwo.type = 'password';
-   }}
-);
-
-function icon(){
-    document.getElementById('eyeicon').src="./images/cross.jpg"
-}
 
 
-function login() {
-    let email = document.getElementById('mail').value
-    let password = document.getElementById('password').value
-    console.log(email, password);
+/*Carousel*/
 
-    let useremail = localStorage.getItem('usermail')
-    let userpass = localStorage.getItem('userpassword')
-
-    if (email != useremail) {
-        alert("INVALID EMAIL !")
-    }
-    else if (password != userpass) {
-        alert("INVALID PASSWORD")
-    }
-    else {
-        alert("Logged in successfully !")
-        window.location.href = "home.html";
-
-    }
-
-}
+const gallery = document.querySelector('.gallery');
+const backBtn = document.getElementById('back-btn');
+const nextBtn = document.getElementById('next-btn');
 
 
-function forgot() {
-    let email = prompt("Enter your email");
-    let useremail = localStorage.getItem('usermail');
-    let userpass = localStorage.getItem('userpassword');
+backBtn.addEventListener('click', () => {
+    gallery.scrollBy({ left: -900, behavior: 'smooth' });
+});
 
-    if (email !== useremail) {
-        alert("Email not found!");
-    } else {
-        alert("Your password is: " + userpass);
-    }}
-function faqshow(){
-        document.getElementById('faq').style.display = 'block flex';
-        document.getElementById('less').style.display='block';
-        document.getElementById('more').style.display='none';
-        document.getElementById('bottom1').style.background='#262626';
-        document.getElementById('bottom2').style.background='#262626';
+nextBtn.addEventListener('click', () => {
+    gallery.scrollBy({ left: 900, behavior: 'smooth' });
+});
+
+
+/*Frequently Asked Questions*/
+function faqshow() {
+    document.getElementById('faq').style.display = 'block flex';
+    document.getElementById('less').style.display = 'block';
+    document.getElementById('more').style.display = 'none';
+    document.getElementById('bottom1').style.background = '#262626';
+    document.getElementById('bottom2').style.background = '#262626';
 
 
 }
@@ -90,22 +38,69 @@ function faqhide() {
 
 
 
-let slideIndex = 1;
-showSlides(slideIndex);
+/*Dropdown*/
+function nav() {
+    document.getElementById('ham').style.display = "inline";
 
-function plusSlides(n) {
-    showSlides(slideIndex += n);
+    document.getElementById('firstnav').style.flexDirection = "column";
+    document.getElementById('secondnav').style.flexDirection = "column";
+    document.getElementById('menu').style.flexDirection = "column";
+
+
+    let menu = document.getElementById('menu');
+    if (menu.style.display === "flex") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "flex";
+    }
 }
 
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+
+
+/*transaction*/
+function transac() {
+
+    let sender = document.getElementById('name').value;
+    let accountrec = document.getElementById('accountrec').value;
+    let accountsend = document.getElementById('accountsend').value;
+    let amount = document.getElementById('amount').value;
+
+    if (sender === "") {
+        alert("Enter your Name");
+    } else if (accountrec === "") {
+        alert("Enter Your Account Number");
+    } else if (accountsend === "") {
+        alert("Enter Reciever's Account Number");
+    } else if (amount === "") {
+        alert("Enter Amount");
+    } else {
+        localStorage.setItem("sendername", sender);
+        localStorage.setItem("useraccount", accountrec);
+        localStorage.setItem("recieveraccount", accountsend);
+        localStorage.setItem("useramount", amount);
+        alert("Successfully send!");
+        window.location.href = "home.html";
     }
-    slides[slideIndex - 1].style.display = "block";
-    let translateXValue = -(slideIndex - 1) * 100;
-    document.querySelector('.flex').style.transform = `translateX(${translateXValue}%)`;
+}
+
+
+/*faq answer and question toggle*/
+function toggleAnswer(answerId) {
+    const answerElement = document.getElementById(answerId);
+    const Hide = answerElement.classList.contains('hidden');
+    answerElement.classList.toggle('hidden', !Hide);
+}
+
+
+/*logout*/
+function logout() {
+    let answer = prompt("Do you want to logout? Y/N");
+    if (answer && answer.toUpperCase() === 'Y') {
+        localStorage.removeItem('loginEmail');
+        localStorage.removeItem('password');
+        alert("You have successfully logged out!");
+        window.location.href = "login.html";
+    } else if (answer && answer.toUpperCase() === 'N') {
+        alert("Logout cancelled.");
+    }
 }
