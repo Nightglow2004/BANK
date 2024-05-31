@@ -86,20 +86,30 @@ function login() {
     }
 }
 
-//Shows the profile
 function displayProfile() {
     const email = localStorage.getItem('usermail');
     const accNumber = localStorage.getItem(`acc_${email}`);
     const name = localStorage.getItem('usernamefirst');
     const nam = localStorage.getItem('usernamelast');
+    const amount = localStorage.getItem('amount1');
+    console.log(amount);
+
     document.getElementById('row1').innerHTML = 'Name: ' + name + " " + nam;
     document.getElementById('row2').innerHTML = 'ACC Number: ' + accNumber;
     document.getElementById('row3').innerHTML = 'Email id: ' + email;
-    document.getElementById('Welcome').innerHTML = "Welcome," + name + " " + nam;
+    document.getElementById('Welcome').innerHTML = "Welcome, " + name + " " + nam;
+    document.getElementById('row4').innerHTML = "Balance: " + amount;
 
 }
 
-
+function amounthide() {
+    const amount = document.getElementById('amountpro').value;
+    localStorage.setItem("amount1", amount);
+    displayProfile();
+    document.getElementById('amountprofile').style.display = 'none';
+    document.getElementById('amountpro').style.display = 'none';
+    document.getElementById('submitpro').style.display = 'none';
+}
 
 
 /*Forgot Password*/
