@@ -104,3 +104,29 @@ function logout() {
         alert("Logout cancelled.");
     }
 }
+
+function send(){
+    document.getElementById('transaction').style.display = "inline"
+}
+function withdraw(){
+    document.getElementById('withdraw').style.display="block"
+    let withdrawamount=document.getElementById('draw').value
+    let amount = localStorage.getItem('amount1');
+    let newamount = parseInt(amount)-parseInt(withdrawamount)
+    if(newamount<2000){
+        alert("insufficeint balance");
+    }
+    else{
+        localStorage.setItem("amount1", newamount);
+
+    }
+
+}
+function deposit(){
+    document.getElementById('deposit').style.display="block"
+    let depositamount=document.getElementById('depo').value
+    let amount = localStorage.getItem('amount1');
+    let newamount = parseInt(amount)+parseInt(depositamount)
+    localStorage.setItem("amount1", newamount);
+
+}
